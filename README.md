@@ -2,7 +2,7 @@
 Get the total time you have spent cubing while using CSTimer.
 
 ## How to use this program
-####Currently does not work on macs because of decoding bug
+Currently does not work on macs because of decoding bug
 1. First you need python 3 installed, you can get it at [pythons official website](https://www.python.org/)
 2. You need to download this repo, do that by clicking the button that say clone or download and select download zip
 3. Then you need to extract the zip somewhere, remember that location you will need it later
