@@ -28,8 +28,9 @@ except json.JSONDecodeError:
 	exit()
 
 # Go through all the sessions in the file,
-# len() - 1 because the last object is a properties object
-for session_nr in range(1, len(json_file) - 1):
+# Range should be + 1 to reach the last one, because it is not inclusive
+# But since we have an extra object with session no modification is required
+for session_nr in range(1, len(json_file)):
 	session = json_file["session%s" % session_nr]
 
 	# Don't know why this works or why it's needed
@@ -50,11 +51,19 @@ for session_nr in range(1, len(json_file) - 1):
 
 		session_stats[session_nr - 1][0] += time_ms
 
+properties = json.loads(json_file["properties"])
+session_data = json.loads(properties["sessionData"])
+for session_nr in range(1, len(session_data) + 1):
+	current_session = session_data[str(session_nr)]
+	session_name = current_session["name"]
+	session_stats[session_nr - 1][2] = session_name
+
 # Calculate the time in hours, minutes and seconds
 seconds = total_time_ms / 1000
 hours = math.floor(seconds / 3600)
 minutes = math.floor((seconds / 60) % 60)
 seconds = round(seconds % 60)
 
+print(session_stats)
 print(total_solves)
 print(hours, minutes, seconds)
