@@ -5,18 +5,18 @@ import json
 file_names = glob.glob("*.txt")
 if len(file_names) != 1:
 	print("Please have 1 .txt file in this directory")
-	quit()
+	exit()
 else:
 	file_name = file_names[0]
 
-# Opens the found file, if not a valid JSON file, ask the user to supply a valid file
-try:
-	with open(file_names, "r") as file:
-		text = file.read()
-except TypeError:
-	print("Please put a CSTimer .txt file in the directory")
-	quit()
+# Loads the found file
+with open(file_name, "r") as file:
+	text = file.read()
 
-# Make read string into a JSON file
-json_file = json.loads(text)
+# Make read string into a JSON file, if it is an invalid file, ask the user for a good file and exit the program
+try:
+	json_file = json.loads(text)
+except json.JSONDecodeError:
+	print("Please supply a valid CSTimer file")
+	exit()
 

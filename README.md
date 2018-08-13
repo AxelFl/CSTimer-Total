@@ -1,2 +1,2 @@
 # CSTimer-Total
-Get the total time spent cubing while using CSTimer.
+Get the total time you have spent cubing while using CSTimer.
