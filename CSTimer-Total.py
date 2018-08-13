@@ -1,6 +1,7 @@
 import glob
 import json
 import math
+import time
 
 total_solves = 0
 total_time_ms = 0
@@ -58,11 +59,17 @@ for session_nr in range(1, len(session_data) + 1):
 	session_name = current_session["name"]
 	session_stats[session_nr - 1][2] = session_name
 
+
 # Calculate the time in hours, minutes and seconds
-seconds = total_time_ms / 1000
-hours = math.floor(seconds / 3600)
-minutes = math.floor((seconds / 60) % 60)
-seconds = round(seconds % 60)
+# Function because it is used multiple times
+# Returns a tuple with the times
+def get_time(ms):
+	seconds = ms / 1000
+	hours = math.floor(seconds / 3600)
+	minutes = math.floor((seconds / 60) % 60)
+	seconds = round(seconds % 60)
+	return hours, minutes, seconds
+
 
 # Find the most used session in time
 highest_time = 0
@@ -80,7 +87,19 @@ for session in session_stats:
 		most_used_solves = session
 		highest_solves = session[1]
 
+print("You have spent a total of %s hours, %s minutes and %s seconds of solving in CSTimer" % get_time(total_time_ms))
+print("With a total of %s solves" % total_solves)
+print("")
+print("The session you have spent the most time solving with is %s" % most_used_time[2])
+print("In that session you spent a total of %s hours, %s minutes and %s seconds" % get_time(most_used_time[0]))
+print("With a total of %s solves" % most_used_time[1])
+print("")
+print("The session you have the most solves with is %s" % most_used_solves[2])
+print("In that session you spent a total of %s hours, %s minutes and %s seconds" % get_time(most_used_solves[0]))
+print("With a total of %s solves" % most_used_solves[1])
 
-print(session_stats)
-print(total_solves)
-print(hours, minutes, seconds)
+for session in session_stats:
+	print("")
+	print(session[2])
+	print("%s hours, %s minutes, %s seconds" % get_time(session[0]))
+	print("%s solves" % session[1])
