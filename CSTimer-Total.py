@@ -46,5 +46,5 @@ hours = math.floor(seconds / 3600)
 minutes = math.floor((seconds / 60) % 60)
 seconds = round(seconds % 60)
 
-print(total_solves)
-print(hours, minutes, seconds)
+print("You have spent a total of %s hours, %s minutes and %s seconds of solving in CSTimer" % (hours, minutes, seconds))
+print("Whith a total of %s solves" % total_solves)
