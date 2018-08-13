@@ -112,3 +112,5 @@ for session in session_stats:
 	print(session[2])
 	print("%s hours, %s minutes, %s seconds" % get_time(session[0]))
 	print("%s solves" % session[1])
+
+input()
