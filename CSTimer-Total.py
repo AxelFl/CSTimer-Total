@@ -5,6 +5,9 @@ import math
 total_solves = 0
 total_time_ms = 0
 
+# This is where the stats of individual sessions will go
+session_stats = []
+
 # Finds all .txt files and if only 1 is present save that file name, else exit the program
 file_names = glob.glob("*.txt")
 if len(file_names) != 1:
@@ -32,13 +35,20 @@ for session_nr in range(1, len(json_file) - 1):
 	# Don't know why this works or why it's needed
 	session = json.loads(session)
 
+	# First index is time and second is number of solves
+	# Third is the name of the session which will be filled in later
+	session_stats.append([0, 0, None])
+
 	for solve in session:
 		total_solves += 1
+		session_stats[session_nr - 1][1] += 1
 
 		# Get the time in milliseconds
 		time_ms = solve[0][1]
 
 		total_time_ms += time_ms
+
+		session_stats[session_nr - 1][0] += time_ms
 
 # Calculate the time in hours, minutes and seconds
 seconds = total_time_ms / 1000
