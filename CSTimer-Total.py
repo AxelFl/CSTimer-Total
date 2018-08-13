@@ -64,6 +64,23 @@ hours = math.floor(seconds / 3600)
 minutes = math.floor((seconds / 60) % 60)
 seconds = round(seconds % 60)
 
+# Find the most used session in time
+highest_time = 0
+most_used_time = []
+for session in session_stats:
+	if session[0] > highest_time:
+		most_used_time = session
+		highest_time = session[0]
+
+# Find the most used session in number of solves
+highest_solves = 0
+most_used_solves = []
+for session in session_stats:
+	if session[1] > highest_solves:
+		most_used_solves = session
+		highest_solves = session[1]
+
+
 print(session_stats)
 print(total_solves)
 print(hours, minutes, seconds)
