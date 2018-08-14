@@ -97,14 +97,34 @@ for session in session_stats:
 # Print out all the special statistics at the end
 print("You have spent a total of %s hours, %s minutes and %s seconds of solving in CSTimer" % get_time(total_time_ms))
 print("With a total of %s solves" % total_solves)
+# if the number of hours is 0, 0 evaluates to False in python, print the time without hours
+if not get_time((total_time_ms/total_solves))[0]:
+	# [1:] Gets the tuple without the hour
+	print("Average time: %s minutes and %s seconds" % get_time((total_time_ms/total_solves))[1:])
+else:
+	print("Average time: %s hours, %s minutes and %s seconds" % get_time((total_time_ms/total_solves)))
+
 print("")
 print("The session you have spent the most time solving with is %s" % most_used_time[2])
 print("In that session you spent a total of %s hours, %s minutes and %s seconds" % get_time(most_used_time[0]))
 print("With a total of %s solves" % most_used_time[1])
+# if the number of hours is 0, 0 evaluates to False in python, print the time without hours
+if not get_time(most_used_time[0]/most_used_time[1])[0]:
+	# [1:] Gets the tuple without the hour
+	print("Average time: %s minutes and %s seconds" % get_time((most_used_time[0]/most_used_time[1]))[1:])
+else:
+	print("Average time: %s hours, %s minutes and %s seconds" % get_time((most_used_time[0]/most_used_time[1])))
+
 print("")
 print("The session you have the most solves with is %s" % most_used_solves[2])
 print("In that session you spent a total of %s hours, %s minutes and %s seconds" % get_time(most_used_solves[0]))
 print("With a total of %s solves" % most_used_solves[1])
+# if the number of hours is 0, 0 evaluates to False in python, print the time without hours
+if not get_time(most_used_solves[0]/most_used_solves[1])[0]:
+	# [1:] Gets the tuple without the hour
+	print("Average time: %s minutes and %s seconds" % get_time(most_used_solves[0]/most_used_solves[1])[1:])
+else:
+	print("Average time: %s hours, %s minutes and %s seconds" % get_time((most_used_solves[0]/most_used_solves[1])))
 
 # Prints out all of the stats at the end
 for session in session_stats:
@@ -112,5 +132,12 @@ for session in session_stats:
 	print(session[2])
 	print("%s hours, %s minutes and %s seconds" % get_time(session[0]))
 	print("%s solves" % session[1])
+	# If there are no solves, there is no average
+	if not session[1]:
+		continue
+	if not get_time(session[0]/session[1])[0]:
+		print("Average time: %s minutes and %s seconds" % get_time(session[0]/session[1])[1:])
+	else:
+		print("Average time: %s hours, %s minutes and %s seconds" % get_time(session[0]/session[1]))
 
 input()
