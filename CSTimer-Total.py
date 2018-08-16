@@ -1,5 +1,4 @@
 import glob
-import json
 import math
 
 total_solves = 0
